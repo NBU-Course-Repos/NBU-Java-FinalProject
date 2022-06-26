@@ -4,26 +4,23 @@ import java.math.BigDecimal;
 
 public class Print {
     PrintType printType;
-    PaperSize printSize;
+    PaperSize paperSize;
     PaperType paperType;
-    BigDecimal paperCost;
     String printTitle;
     int numberOfPages;
+    BigDecimal sellCost;
+    int discountAt;
 
-    Print(PrintType printType, PaperSize printSize, PaperType paperType, String printTitle, int numberOfPages){
+    Print(PrintType printType, PaperSize paperSize, PaperType paperType, String printTitle, int numberOfPages, BigDecimal sellCost, int discountAt){
         this.printType = printType;
-        this.printSize = printSize;
+        this.paperSize = paperSize;
         this.paperType = paperType;
         this.printTitle = printTitle;
         this.numberOfPages = numberOfPages;
+        this.sellCost = sellCost;
+        this.discountAt = discountAt;
     }
-
-    Print(){
+    BigDecimal calculateDiscount(BigDecimal percent){
+        return sellCost.multiply(percent).divide(BigDecimal.valueOf(100));
     }
-
-    void SetPaperCost(BigDecimal paperCost){
-        this.paperCost = paperCost;
-    }
-
-
 }
