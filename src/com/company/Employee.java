@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 
 public class Employee {
     WorkerPosition position;
-    BigDecimal salary;
+    static BigDecimal salary;
 
-    Employee(WorkerPosition position, BigDecimal salary){
+    Employee(WorkerPosition position){
         this.position = position;
-        this.salary = salary;
     }
+
 }

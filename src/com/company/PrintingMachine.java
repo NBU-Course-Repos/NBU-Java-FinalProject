@@ -22,12 +22,13 @@ public class PrintingMachine extends Thread {
     void printItem(Print print){
         this.print = print;
     }
-
-    public void run(){
+    @Override
+    public void run() {
+        try {
             int page = 0;
-            if (failedPrintPage != 0 && loadedPaper != 0) {
+            if (this.failedPrintPage != 0 && this.loadedPaper != 0) {
                 page = failedPrintPage;
-                failedPrintPage = 0;
+                this.failedPrintPage = 0;
             }
             while (page < print.numberOfPages) {
                 try {
@@ -36,16 +37,20 @@ public class PrintingMachine extends Thread {
                     e.printStackTrace();
                 }
                 page++;
-                if (loadedPaper == 0) {
-                    failedPrintPage = page;
+                if (this.loadedPaper == 0) {
+                    this.failedPrintPage = page;
                     System.out.println("Not enough paper to finish printing " + print.printTitle + ". Current " +
                             "print failed on page " + page);
                 }
-                loadedPaper--;
+                this.loadedPaper--;
                 System.out.println(printerName + ": printing page " + page + " of " + print.numberOfPages + " from "
                         + print.printTitle);
             }
         }
+        catch (NullPointerException npe){
+            System.out.println("You have to load a print that would be printed. You can perform that by using printItem()");
+        }
+    }
 
     void loadMorePaper(int amountOfPaperToLoad){
         loadedPaper+=amountOfPaperToLoad;
